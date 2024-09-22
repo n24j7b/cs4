@@ -1,49 +1,99 @@
-java c
-HUDM 5026 - Introduction to Data Analysis and 
-Graphics in R 
-HW 00 – Getting Started 
-1 Data and File Paths To analyze data in R, you need to be able to import. The method you use for importing data will depend on what format the data are in. Data may be found in many formats and ﬁle extensions including those based on speciﬁc software packages such as Microsoft Excel (.xlsx), SPSS (.sav), Stata (.dta), SAS (.sas7bdat), MATLAB (.mat), or those based on more universal data extensions such as text ﬁles (.txt) or comma-separated values ﬁles (.csv). We will focus ﬁrst on the more universal extensions because they are more broadly applicable. Most data analysis packages allow you to save data as a comma-separated values ﬁle, so we will begin with that.There is a ﬁle called “acupuncture.csv” in the “Data Sets” folder on the course Can-vas page. Save the data set to your computer. Be sure to note where you save it be-cause we will need to ﬁnd it again. On my machine, a Mac, the ﬁle path is located at /Users/bryankeller/Documents/Data/acupuncture. csv. How do you ﬁnd the ﬁle path on your machine? On a Mac, you can right-click on the ﬁle and then press the alt/option key on your keyboard and select “Copy ‘acupuncture.csv’ as Pathname”. Then paste the ﬁle path to a text ﬁle. Alternatively, you could select "Get Info." Then, highlight the ﬁle path next to the "Where" information and copy and paste it into a text ﬁle.
-This will produce the ﬁle path up to and including the folder that contains the ﬁle, but it will not include the ﬁle itself, so you will need to add that.  That is, copy/paste will produce the following:
-/Users/bryankeller/Documents/Data
-Since we know the name of the ﬁle is acupuncture. csv, we simply add that onto the end of the ﬁle path as follows:
-/Users/bryankeller/Documents/Data/acupuncture. csvOn a machine running Windows OS, the process is similar.  Hold shift and right-click on the ﬁle and select “Copy as path” .   Alternatively,  you could select “Properties”,  go to the "General" tab, and select "Location". Typically on machines running Windows OS the ﬁle path will start with a capital letter that indicates the drive, followed by a colon and a backslash. On your machine, it might be something like the following:
-C:\Users\YourName\Documents\acupuncture . csv
-Note, however, that R requires that you use forward slashes or double backslashes, but not single backslashes, so you must convert this ﬁle path:
-C:/Users/YourName/Documents/acupuncture . csv
-Once you know the ﬁle path, you will be able to use functions in R to import the ﬁle.
-2    Functions for Importing A useful function for importing .csv ﬁles is read. csv(). The ﬁrst argument to the function is file where you will give the ﬁle path in quotes. The function also has other important arguments including header  =  TRUE: whether the ﬁrstrow of data should be included as the column names, na. strings  =  "NA":  where you list character strings that indicate missing data, and others. To import the acupuncture data ﬁle to my R workspace I have to assign it a name and then use read. csv() to import the data.  There is a header here and I have no missing data so Ido not need to change the default values for either of those arguments, so I can leave them out of my call to read. csv().
-dat  <- read. csv(file = "/Users/bryankeller/Documents/Data/acupuncture. csv")Now that the data have been imported to my 代 写HUDM 5026 - Introduction to Data Analysis and Graphics in RMatlab
-代做程序编程语言working environment, I can act on them (e.g.,  display,  manipulate,  summarize,  analyze, etc.).   Several functions that I ﬁnd useful for understanding imported data are dim(), head(), and str(). dim() gives the number of rows and columns for a matrix-like object.  head() shows the ﬁrst 6 rows of a data set. str() gives a summary of each column in a data frame.  Here is the output for each of these functions for the acupuncture data set called dat:
->  dim(dat)
-[1]  301     9> head(dat) id age sex migraine chronicity acupuncturist group pk1 pk5 1 104 32 1 1 14 12 0 16.00 15.33333 2 108 56 1 1 40 9 0 16.50 23.25000 3 112 45 1 1 27 9 1 9.25 6.25000 4 113 45 1 1 30 9 1 42.50 51.25000 5 114 49 1 1 49 9 1 24.25 25.25000 6 126 47 1 1 42 5 0 21.00 15.25000 
->  str(dat)
-’data . frame’:  301  obs .  of    9  variables:
-$  id                        :   int     104  108  112  113  114  126  130  131  135  137   . . .
-$  age                   :   int    32  56  45  45  49  47  46  64  59  53   . . .
-$  sex                   :  int     1  1  1  1  1  1  1  1  1  1   .  . .
-$  migraine           :  int     1  1  1  1  1  1  1  1  1  1   . . .
-$  chronicity      :   int    14  40  27  30  49  42  3  23  40  32   . . .
-$  acupuncturist:   int    12  9  9  9  9  5  7  7  7  7   . . .
-$  group                  :   int     0  0  1  1  1  0  1  1  0  1   .  . .
-$  pk1                   :  num     16   16 . 5  9 . 25  42 . 5  24 . 25   .  .  .
-$  pk5                   :   num     15 .33  23 . 25  6 . 25  51 . 25  25 . 25   .  .  .
-There are other functions for importing in base R and in other packages. We will explore more of these in the future.
-3    Homework 0.0 
-1.  Use dim() to examine the dimensions of the acupuncture data in dat. How many rows and columns are there?
-2.  Use str() to examine dat. What are the variable names?  Verify with the names() function. What are the variable classes (e.g., numeric,integer, character, logical, etc.)?
-3.  Use head() to examine dat. Do the values make sense for each variable?  Why or why not?
-4.  Use read. csv() to import the acupuncture data again, however this time make two changes. First, name the imported data dat2 instead of dat.  Second, use the header
-=  FALSE argument within your call to the read. csv() function.
-5.  Use dim() to examine dat2. Do the dimensions of dat1 and dat2 diﬀer? If so, why?
-6.  Use str() to examine dat2. What are the variable names? Verify with the names() function. What are the variable classes (e.g., numeric,integer, character, logical, etc.)? Explain why they changed as compared with dat.
-7.  Use head() to examine dat2. Do the values make sense for each variable? Why or why not?
-8.  There is package called readr that has a function in it called read_csv().  Note that the only diﬀerence in name is the use of an underscore instead of a dot. The read_csv() function will import the data as a tibble. A tibble is a form. of data frame. used in the tidyverse, a suite of packages for data science in R. Install the readr package and then load it as follows:
-install. packages("readr")
-library(readr)Then, use the function read_csv() to import the acupuncture data again, this time calling it dat3.  Use dim(), head(), and str() to examine the data.  We will discuss the properties of tibbles and data frames in more detail soon.
+java cProject Phase 1 
+Due Sep 29 by 8:59pm
+Points 100
+Submitting a file upload
+File Types pdf
+Available Sep 2 at 9pm - Sep 29 at 8:59pm
+Start Assignment
+The first phase of the project deals with the Analysis and Specification. You should review the Project
+Requirements Document (which will be released around the same time this assignment opens) that has
+the system requirements and description of what you will be developing.  Please ask questions about the
+requirements on Piazza in a private Team+Instructors post.
+Essentially, anything Leo does in the lectures on Analysis and Design for the GTOnline project you
+should do for your analysis and design of this project. There is also a sample submission available on
+Canvas that will help guide you in creating your submission and shows mostly everything required for
+this phase.  When in doubt, please refer to them.  If you still aren't sure, open a private
+"Team+Instructors" note.  If your submission is missing an element that was present in the lectures or on
+the sample submission, you will lose credit for what's missing, and "we weren't sure if you needed that"
+will not be a valid reason for returning the points that were lost. 
+Phase 1 Deliverables:
+1. Information Flow Diagram (IFD) (10%)
+2. Enhanced Entity-Relationship (EER) Diagram (40%)
+Surrogate keys should not be used on the EER diagram in this phase.
+NO CREDIT is granted for your EER if it is auto-generated by any tool such as MySQL
+workbench, uses crows-feet notation, or deviates from the notation Leo uses in the lectures or the
+notation used in the textbook.
+Tools available to create your EER include: draw.io (https://www.draw.io/) , LucidCharts
+(https://www.lucidchart.com/pages/tour/ER_diagram_tool) , among others.
+3. A project report containing:
+Data Types (5%)
+Business Logic Constraints (logic which cannot be reflected in the EER model) (5%)
+Task Decomposition (TD): rules of thumb/oval diagrams- both single and decomposed (10%)
+Abstract Code (AC) pseudo-code: input validation/error handling, how to navigate between tasks
+(30%)
+The most weight for project grading is on the EER and AC, so make sure to put as much detail and effort
+into those items as possible.How You Should Work:
+Teams should use their official assigned GitHub Enterprise account for collaborating on team projects.
+Not utilizing GitHub may lead to a teammate earning a reduced project grade if there is no record of their
+contributions and their teammates communicate that they did not make any material contributions to the
+project.
+Login using your GaTech credentials to https://github.gatech.edu/ (https://github.gatech.edu/)  where
+your repository has been created for you with all your team members as collaborators.  (You should have
+also received an email from when you were added to your repo.) Once at your repo, you should clone it
+onto your workstation using either Git's clone command (https://git-scm.com/book/en/v1/Git-BasicsGetting-a-Git-Repository#Cloning-an-Existing-Repository)
+or GitHub Desktop
+(https://desktop.github.com) - be aware that GT's GitHub does not allow access via SSH unless you are
+connected to the Georgia Tech VPN.
+The objective of this course is to learn all phases of relational database development and in order to do
+that, teams should work collaboratively, not separately. You should not say, "OK, I'll take the EER
+diagram, you go write the IFD, John can write up the Task Decomposition and Jane can take the
+formatting and constraints."  Rather, each member should each work on all parts of the project, all
+reviewing, all having inp代 写data、Python, Java/SQL
+代做程序编程语言ut, all fully understanding each part of the design. That way all students learn all
+aspects of the project to help solidify the skills needed to be successful on the exams.  One way to
+ensure this is by the following steps:
+1. Create a directory called “Phase_1” in the team GitHub repository we created for your team (do this
+by committing any file in the directory called “Phase_1” to GitHub).
+2. As you work on phase 1, continue to commit and push the files to GT’s GitHub enterprise server.
+3. Please review the sample submission that is provided on Canvas. Your deliverables should be similar
+to those in the sample submission
+How and What To Submit:
+Convert all deliverables to a PDF format, and submit them as three files to this Canvas assignment:
+1. team#_p1_ifd.pdf - your IFD
+2. team#_p1_eer.pdf - your EER
+3. team#_p1_report.pdf - your project report
+(Replace the # with your full team number, so if you are Team001, files would be
+"team001_p1_ifd.pdf"…)
+Please review the sample submission that is posted on Canvas.  Your deliverables should be similar to
+those in the sample submission.  
+If you are unsure how to upload files to a Canvas assignment, please refer to this Canvas guide
+(https://community.canvaslms.com/t5/Student-Guide/How-do-I-upload-a-file-as-an-assignment-submission-Phase 1 Rubric (1)
+in-Canvas/ta-p/274) . Since this is a team assignment, any team member can make a submission on
+behalf of the entire team.  For more information, please refer to this Canvas guide
+(https://community.canvaslms.com/t5/Student-Guide/How-do-I-submit-an-assignment-on-behalf-of-agroup/ta-p/294)
+.  Your team's final submission will be graded, so please be sure all team members agree
+on what will be submitted. We will not grade previous submissions and will not consider any requests to
+do so.
+Preparing for Future Phases
+In this phase, you should not be concerned with implementation details such as what technology stack
+you want to build your project on. We DO want you to plan ahead so that your team can be prepared for
+the last phase, so we are providing these details now NOT so that you choose a stack while working on
+this phase, but in order to make an informed decision when the time comes to make that choice.
+We suggest using WAMP, WAPP, MAMP, MAPP (which means the combination of Mac, Windows,
+Apache, MySQL or PostgreSQL, and PHP v7, and can be downloaded as a package for either OS) but
+you are by no means limited to those. You are welcome to implement your system in any language or
+platform you wish (Python, Java, Ruby, .Net) subject to the caveat that you must write your own
+SQL and implement your own logic on the database. Use of ORM or ORM-like tools such as hibernate,
+query-by-example frameworks (like Power Query) and others which handle your database interaction
+(and even your schema design) are strictly prohibited.  Note: SQLite or MS Access is not allowed. A
+standalone, full featured relational DBMS is required for the project: teams are free to use PostgreSQL,
+MySQL, MS SQL Server, or even Oracle if desired. (Non-relational noSQL: Hadoop, Cassandra,
+MongoDB, etc. are not allowed. “Built-in” or application-hosted databases should not be used.  Nonrelational
+databases that utilize SQL as an interface are also not allowed.  Data warehouse-specific
+platforms, such as Snowflake or Teradata, should also be avoided.)
+As always, if you have questions, please post on Piazza to your “Team+Instructors” group.To
 
-
-
-
+s Information Flow Diagram EER Diagram Data Types Constraints Task Decomposition Abstract Code
 
          
 加QQ：99515681  WX：codinghelp
